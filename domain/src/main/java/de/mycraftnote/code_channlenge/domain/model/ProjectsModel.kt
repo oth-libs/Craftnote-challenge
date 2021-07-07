@@ -8,7 +8,7 @@ data class ProjectModel(
   val id: String?,
   val name: String?,
   val projectType: String?,
-  val startDate: Int?,
+  val creationDate: Int?,
   val street: String?,
   val zipcode: String?,
   val city: String?,

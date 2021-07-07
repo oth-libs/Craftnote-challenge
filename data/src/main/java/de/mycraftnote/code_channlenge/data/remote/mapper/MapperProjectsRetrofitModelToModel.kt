@@ -7,9 +7,11 @@ import de.mycraftnote.code_channlenge.domain.model.ProjectModel
 import de.mycraftnote.code_channlenge.domain.model.ProjectsModel
 
 /**
- * Map [ProjectsRetrofitModel] to [ProjectModel]
+ * Map [ProjectsRetrofitModel] to [ProjectModel], leaves only FOLDER projects, sort by creationDate
  */
 internal object MapperProjectsRetrofitModelToModel : Mapper<ProjectsRetrofitModel, ProjectsModel> {
+
+  private const val FOLDER_TYPE = "FOLDER"
 
   override fun map(from: ProjectsRetrofitModel): ProjectsModel {
     return from.run {
@@ -22,22 +24,22 @@ internal object MapperProjectsRetrofitModelToModel : Mapper<ProjectsRetrofitMode
   private fun mapsProjects(projects: List<ProjectRetrofitModel>?): List<ProjectModel>? {
     return projects?.let {
       mutableListOf<ProjectModel>().apply {
-        projects.forEach { project ->
+        projects.filter { it.projectType.equals(FOLDER_TYPE, true) }.forEach { project ->
 
           val projectModel = ProjectModel(
             id = project.id,
             name = project.name,
             projectType = project.projectType,
-            startDate = project.startDate,
+            creationDate = project.creationDate,
             street = project.street,
             zipcode = project.zipcode,
             city = project.city,
             country = project.country
           )
-          
+
           add(projectModel)
         }
-      }
+      }.sortedByDescending { it.creationDate }
     }
   }
 

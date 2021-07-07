@@ -9,7 +9,7 @@ object PresentationModule {
 
   fun load() {
     loadKoinModules(module {
-      viewModel { ProjectsViewModel() }
+      viewModel { ProjectsViewModel(getFolderProjectsUseCase = get()) }
     })
   }
 }

@@ -10,7 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
-class RetrofitFactory {
+internal class RetrofitFactory {
 
   @ExperimentalSerializationApi fun build(json: Json): Retrofit {
     return Retrofit.Builder()

@@ -4,18 +4,18 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ProjectsRetrofitModel(
-  @SerialName("projects") val projects: List<ProjectRetrofitModel>
+internal data class ProjectsRetrofitModel(
+  @SerialName("projects") val projects: List<ProjectRetrofitModel>? = null
 )
 
 @Serializable
-data class ProjectRetrofitModel(
-  @SerialName("id") val id: String?,
-  @SerialName("name") val name: String?,
-  @SerialName("projectType") val projectType: String?,
-  @SerialName("startDate") val startDate: Int?,
-  @SerialName("street") val street: String?,
-  @SerialName("zipcode") val zipcode: String?,
-  @SerialName("city") val city: String?,
-  @SerialName("country") val country: String?,
+internal data class ProjectRetrofitModel(
+  @SerialName("id") val id: String? = null,
+  @SerialName("name") val name: String? = null,
+  @SerialName("projectType") val projectType: String? = null,
+  @SerialName("startDate") val startDate: Int? = null,
+  @SerialName("street") val street: String? = null,
+  @SerialName("zipcode") val zipcode: String? = null,
+  @SerialName("city") val city: String? = null,
+  @SerialName("country") val country: String? = null,
 )

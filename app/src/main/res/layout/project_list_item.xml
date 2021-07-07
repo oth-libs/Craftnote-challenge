@@ -1,10 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
+  <data>
 
-</androidx.cardview.widget.CardView>
+    <variable
+        name="projectModel"
+        type="de.mycraftnote.code_channlenge.domain.model.ProjectModel" />
+
+    <variable
+        name="onClick"
+        type="android.view.View.OnClickListener" />
+  </data>
+
+  <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/list_item_margin">
+
+      <de.mycraftnote.code_challenge.utils.SquareTextView
+          android:id="@+id/tv_name_letter"
+          style="@style/style_23_medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/circle"
+          android:gravity="center"
+          android:padding="10dp"
+          android:text="@{projectModel.nameFirstLetter}"
+          android:textColor="@color/white"
+          tools:text="T" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:gravity="center"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/list_item_margin"
+          android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/style_18_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{projectModel.name}"
+            tools:text="project " />
+
+        <TextView
+            android:id="@+id/tv_address"
+            style="@style/style_14_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{projectModel.address}"
+            android:textColor="@color/gray"
+            app:visibleOrGone="@{projectModel.hasAddress()}"
+            tools:text="address" />
+      </LinearLayout>
+    </LinearLayout>
+
+  </com.google.android.material.card.MaterialCardView>
+</layout>

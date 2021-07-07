@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
  * [DataSourceResultHolder.Status.NO_INTERNET]
  * [DataSourceResultHolder.Status.IN_PROGRESS]
  */
-fun <MODEL> resultFlow(
+internal fun <MODEL> resultFlow(
   networkCall: (suspend () -> DataSourceResultHolder<MODEL>)
 ): Flow<DataSourceResultHolder<MODEL>> {
   return flow {

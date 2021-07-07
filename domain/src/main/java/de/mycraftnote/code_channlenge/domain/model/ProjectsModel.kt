@@ -13,4 +13,13 @@ data class ProjectModel(
   val zipcode: String?,
   val city: String?,
   val country: String?,
-)
+) {
+  fun getNameFirstLetter() = name?.get(0)?.toString() ?: String()
+
+  fun getAddress() = run {
+    if (street.isNullOrBlank() && zipcode.isNullOrBlank() && city.isNullOrBlank() && country.isNullOrBlank()) null
+    else "$street $zipcode, $city, $country"
+  }
+
+  fun hasAddress() = getAddress() != null
+}

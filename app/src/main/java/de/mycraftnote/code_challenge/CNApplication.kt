@@ -1,6 +1,7 @@
 package de.mycraftnote.code_challenge
 
 import android.app.Application
+import de.mycraftnote.code_channlenge.data.di.DataModule
 import de.mycraftnote.code_channlenge.domain.di.DomainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -21,7 +22,7 @@ class CNApplication : Application() {
   @Suppress("EXPERIMENTAL_API_USAGE")
   private fun loadModules() {
     DomainModule.load()
-//    DataModule.load()
+    DataModule.load()
 //    PresentationModule.load()
   }
 }

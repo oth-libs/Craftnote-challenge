@@ -1,5 +1,9 @@
 package de.mycraftnote.code_channlenge.domain.model
 
+data class ProjectsModel(
+  val projects: List<ProjectModel>?
+)
+
 data class ProjectModel(
   val id: String?,
   val name: String?,

@@ -1,42 +1,69 @@
-# Android Coding Challenge
-The following exercises should help us to better assess your skills. We have created an example project that already contains some code.<br>
-Please fork the repository to an own private repository and solve following problems.
+# Craftnote coding challenge
 
-Your code should be clean, efficient and tested.
+## Intro
 
-In doubt, keep it simple!
+This project is written 100% in Kotlin and following MVVM Clean Architecture principles, with Flow/LiveData/Coroutines/DataBinding, the project is thus written in a very clean and modular way, and is easily scalable as the project grows. 
 
- What do you need?
-* [GithHub](https://github.com/) Account
-* Current version of Android Studio 4+ und Gradle
-
-**The Exercises do not have to be solved in the given order**
-
-## Exercise 1
-
-After opening the app a login-screen appears. In this screen there is a login-button whereby the user can access the app.
-
-The screen is developed for a Pixel 2XL display. Please refactor the Layout so that the app can also be used on devices like Pixel 2.
-
-context-package: package de.mycraftnote.code_challenge.ui.login.*
-
-## Exercise 2
-Create a project list in the ProjectListFragment. A single list item should look like:
-
-![viewholder example](./project_item.png)
-
-Where the first character from the project-name displayed in circle.
-The first line is the name of the project, the second line is the full address and can be ignored if the response doesn't contain one.
-You can ignore attributes that are not required for this task.
-The list for this task should contains only Folders, no Projects and sorted after creationDate<br>
-On click on the project a snackbar should be shown with a localized lastOpenedDate.
-Like: Project last opened on: Wed, Mar 31, '21.
-
-endpoint: https://europe-west1-craftnote-development.cloudfunctions.net/api/v1/projects
-
-api key: c322f488-05e7-4f4a-a2b3-41a4f31af501
-
-you can find the documentation for the endpoint [here](https://bitbucket.org/Craftnote/api-doc/).
+It also includes Unit Test inside each module grouped inside a test suite.
 
 
-context-package: de.mycraftnote.code_challenge.ui.task.projects.*
+## Build and run
+
+Simply clone the project, import into Android Studio and run.
+
+## Notes on Exercice 1: 
+
+To have the layout fit all screens while keeping the image in full width, I wrapped the layout inside a scroll view and made the design decision to have the login form be in the middle of the remaining space, using a couple < Space/> views on top and bottom, and a weight of 1, while keeping in mind some necessary padding in between. 
+
+## Notes on Exercice 2:
+
+I reworked the project architecture and changed it into Clean Architecture, the app is separated into 4 modules (detail below).
+
+Please note that this architecture is only applicable to the "task" feature, "login" remained untouched so the viewmodel and repository stayed inside the "app" module.
+
+## Modules
+
+It contains 4 modules in total: 
+
+* **app**: Contains the views fragment/activity and the adapters, view helper classes, extensions and data binding adapters.
+* **presentation**: Contains the ViewModel declaration 
+* **domain**: Contains the Repository interface and UseCases 
+* **data**: Contains the Repository implementation, the retrofit api calls.
+
+
+## Testing
+
+Each module contains a set of tests grouped in a test suite. 
+
+
+## Libraries
+
+* Coroutines
+* Koin
+* Jetpack (Navigation, Data Binding, Lifecycle, LiveData, ViewModel)
+* Kotlinx Serialization
+* Jakewharton retrofit2-kotlinx-serialization-converter
+* Retrofit
+* JUnit
+* Mockk
+
+## Code
+
+### Data Source helpers 
+
+**SourceResultHolder**
+
+A generic class that holds a value with its loading status.
+
+
+**DataSourceFlow**
+
+**```resultFlow(networkCall)```** will call the api using ```networkCall``` function.
+
+
+**RemoteDataSource**
+
+**```getRemoteResult```** will execute the ```call``` function, generally coming from a retrofit service, and map it using the ```map``` function. This method automatically checks on network state and handles errors, and returns the right ```SourceResultHolder``` wrapper.
+
+All of these files can be put together with Retrofit services and have a seamless Repository implementation for use cases.
+

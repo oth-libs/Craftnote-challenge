@@ -5,6 +5,7 @@ import de.mycraftnote.code_channlenge.data.remote.model.ProjectRetrofitModel
 import de.mycraftnote.code_channlenge.data.remote.model.ProjectsRetrofitModel
 import de.mycraftnote.code_channlenge.domain.model.ProjectModel
 import de.mycraftnote.code_channlenge.domain.model.ProjectsModel
+import java.util.Calendar
 
 /**
  * Map [ProjectsRetrofitModel] to [ProjectModel], leaves only FOLDER projects, sort by creationDate
@@ -30,7 +31,8 @@ internal object MapperProjectsRetrofitModelToModel : Mapper<ProjectsRetrofitMode
             id = project.id,
             name = project.name,
             projectType = project.projectType,
-            creationDate = project.creationDate,
+            creationDate = project.creationDate?.let { Calendar.getInstance().apply { timeInMillis = it.toLong() * 1000 } },
+            lastOpenedDate = project.lastOpenedDate?.let { Calendar.getInstance().apply { timeInMillis = it.toLong() * 1000 } },
             street = project.street,
             zipcode = project.zipcode,
             city = project.city,

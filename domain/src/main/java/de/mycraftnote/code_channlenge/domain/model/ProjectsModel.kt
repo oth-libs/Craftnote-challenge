@@ -1,5 +1,9 @@
 package de.mycraftnote.code_channlenge.domain.model
 
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+
 data class ProjectsModel(
   val projects: List<ProjectModel>?
 )
@@ -8,7 +12,8 @@ data class ProjectModel(
   val id: String?,
   val name: String?,
   val projectType: String?,
-  val creationDate: Int?,
+  val creationDate: Calendar?,
+  val lastOpenedDate: Calendar?,
   val street: String?,
   val zipcode: String?,
   val city: String?,
@@ -22,4 +27,7 @@ data class ProjectModel(
   }
 
   fun hasAddress() = getAddress() != null
+
+  fun getLastOpenedDateFormatted(): String = SimpleDateFormat("E, MMM dd, yy", Locale.getDefault()).format(lastOpenedDate!!.time)
 }
+

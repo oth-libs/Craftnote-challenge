@@ -14,6 +14,7 @@ internal data class ProjectRetrofitModel(
   @SerialName("name") val name: String? = null,
   @SerialName("projectType") val projectType: String? = null,
   @SerialName("creationDate") val creationDate: Int? = null,
+  @SerialName("lastOpenedDate") val lastOpenedDate: Int? = null,
   @SerialName("street") val street: String? = null,
   @SerialName("zipcode") val zipcode: String? = null,
   @SerialName("city") val city: String? = null,

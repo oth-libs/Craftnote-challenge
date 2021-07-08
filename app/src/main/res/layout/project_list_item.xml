@@ -17,12 +17,14 @@
   <com.google.android.material.card.MaterialCardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:onClick="@{onClick}"
       app:cardCornerRadius="8dp"
       app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="@dimen/list_item_margin">
@@ -41,9 +43,9 @@
 
       <LinearLayout
           android:layout_width="match_parent"
-          android:gravity="center"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/list_item_margin"
+          android:gravity="center"
           android:orientation="vertical">
 
         <TextView

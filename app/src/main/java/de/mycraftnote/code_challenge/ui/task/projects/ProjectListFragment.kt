@@ -5,7 +5,10 @@ import android.view.View
 import de.mycraftnote.code_challenge.R
 import de.mycraftnote.code_challenge.databinding.FragmentProjectListBinding
 import de.mycraftnote.code_challenge.extensions.setup
+import de.mycraftnote.code_challenge.extensions.showMessage
+import de.mycraftnote.code_challenge.extensions.visibleOrGone
 import de.mycraftnote.code_challenge.ui.BaseFragment
+import de.mycraftnote.code_channlenge.domain.datasource.DataSourceResultHolder
 import de.mycraftnote.code_channlenge.domain.model.ProjectModel
 import de.mycraftnote.code_channlenge.presentation.ui.task.projects.ProjectsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,13 +41,37 @@ class ProjectListFragment : BaseFragment<FragmentProjectListBinding>(
 
   private fun observeViewModelCalls() {
     viewModel.dataReceived.observe(viewLifecycleOwner, ::updateAdapter)
+    viewModel.statusUpdated.observe(viewLifecycleOwner, ::updateStatusUi)
   }
 
   private fun updateAdapter(shortUrls: List<ProjectModel>) {
     projectsAdapter.newData(shortUrls)
   }
 
-  private fun onItemClick(projectModel: ProjectModel) {
+  private fun updateStatusUi(status: DataSourceResultHolder.Status) {
+    when (status) {
+      DataSourceResultHolder.Status.IN_PROGRESS -> {
+        toggleLoading(true)
+      }
+      DataSourceResultHolder.Status.NO_INTERNET -> {
+        toggleLoading(false)
+        requireActivity().showMessage(R.string.error_internet)
+      }
+      DataSourceResultHolder.Status.ERROR -> {
+        toggleLoading(false)
+        requireActivity().showMessage(R.string.error_generic)
+      }
+      DataSourceResultHolder.Status.SUCCESS -> {
+        toggleLoading(false)
+      }
+    }
+  }
 
+  private fun toggleLoading(isLoading: Boolean) {
+    binding.pbLoading.visibleOrGone(isLoading)
+  }
+
+  private fun onItemClick(projectModel: ProjectModel) {
+    requireActivity().showMessage(getString(R.string.last_opened, projectModel.getLastOpenedDateFormatted()))
   }
 }

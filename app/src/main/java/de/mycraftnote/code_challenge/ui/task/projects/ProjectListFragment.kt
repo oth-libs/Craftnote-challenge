@@ -55,11 +55,11 @@ class ProjectListFragment : BaseFragment<FragmentProjectListBinding>(
       }
       DataSourceResultHolder.Status.NO_INTERNET -> {
         toggleLoading(false)
-        requireActivity().showMessage(R.string.error_internet)
+        activity?.showMessage(R.string.error_internet)
       }
       DataSourceResultHolder.Status.ERROR -> {
         toggleLoading(false)
-        requireActivity().showMessage(R.string.error_generic)
+        activity?.showMessage(R.string.error_generic)
       }
       DataSourceResultHolder.Status.SUCCESS -> {
         toggleLoading(false)
@@ -72,6 +72,6 @@ class ProjectListFragment : BaseFragment<FragmentProjectListBinding>(
   }
 
   private fun onItemClick(projectModel: ProjectModel) {
-    requireActivity().showMessage(getString(R.string.last_opened, projectModel.getLastOpenedDateFormatted()))
+    activity?.showMessage(getString(R.string.last_opened, projectModel.getLastOpenedDateFormatted()))
   }
 }

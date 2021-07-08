@@ -19,7 +19,7 @@ data class ProjectModel(
   val city: String?,
   val country: String?,
 ) {
-  fun getNameFirstLetter() = name?.get(0)?.toString() ?: String()
+  fun getNameFirstLetter() = name?.get(0)?.toString() ?: String() // replace with proper char for null
 
   fun getAddress() = run {
     if (street.isNullOrBlank() && zipcode.isNullOrBlank() && city.isNullOrBlank() && country.isNullOrBlank()) null
@@ -28,6 +28,6 @@ data class ProjectModel(
 
   fun hasAddress() = getAddress() != null
 
-  fun getLastOpenedDateFormatted(): String = SimpleDateFormat("E, MMM dd, yy", Locale.getDefault()).format(lastOpenedDate!!.time)
+  fun getLastOpenedDateFormatted(): String = lastOpenedDate?.let { SimpleDateFormat("E, MMM dd, yy", Locale.getDefault()).format(lastOpenedDate.time) } ?: String() // replace with proper char for null
 }
 

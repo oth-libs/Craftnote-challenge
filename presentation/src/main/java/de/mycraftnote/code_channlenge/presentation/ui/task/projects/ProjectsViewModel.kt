@@ -50,8 +50,7 @@ class ProjectsViewModel(
   //
   //Font Name: Big
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-  @Suppress("UNUSED")
-  fun getCachedUrls() {
+  fun getFolderProjects() {
     viewModelScope.launch {
       getFolderProjectsUseCase().collect {
 

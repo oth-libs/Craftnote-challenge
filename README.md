@@ -67,3 +67,5 @@ A generic class that holds a value with its loading status.
 
 All of these files can be put together with Retrofit services and have a seamless Repository implementation for use cases.
 
+
+

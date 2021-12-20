@@ -3,9 +3,6 @@ name: Build Android Staging Release
 # see https://help.github.com/en/github/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions#onpushpull_requestbranchestags
 on:
   repository_dispatch:
-  push:
-    tags:
-      - '[0-9]*.[0-9]*.[0-9]*'
 
 jobs:
   build:
@@ -18,8 +15,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Get tag name
-        id: get_tag_name
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      - name: echo tag name
-        run: echo ${GITHUB_REF/refs\/tags\//}
+      - name: show event action
+        run: echo "action triggered - ${{ github.event.action }}"
